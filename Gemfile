@@ -15,16 +15,21 @@ end
 
 group :development do
   gem 'rake'
+  gem 'stove'
 end
 
 group :knife do
   gem 'knife-cookbook-doc'
   gem 'knife-supermarket'
-  gem 'knife-spork'
+  gem 'knife-solo_data_bag', '~> 1.0'
 end
 
 # Kitchen
 group :kitchen do
   gem 'test-kitchen', '~> 1.3'
   gem 'kitchen-docker'
+  gem 'kitchen-vagrant'
+
+  # gem 'kitchen-sync' temporary fix
+  gem 'kitchen-sync', :github => 'coderanger/kitchen-sync', :branch => 'master'
 end

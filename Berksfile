@@ -3,6 +3,6 @@ source 'https://supermarket.chef.io'
 metadata
 
 group :integration do
-  cookbook 'test-nexus', path: 'test/fixtures/cookbooks/test-nexus'
   cookbook 'java'
+  cookbook 'simple-nexus-test', path: 'test/fixtures/cookbooks/simple-nexus-test'
 end
