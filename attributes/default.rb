@@ -5,6 +5,7 @@ default['nexus']['version'] = '2.11.2-06'
 default['nexus']['user'] = 'nexus'
 default['nexus']['group'] = 'nexus'
 default['nexus']['dir'] = '/opt'
+default['nexus']['lock'] = '/var/lib/nexus/nexus.lock'
 
 # Nexus properties
 default['nexus']['conf']['application-port'] = '8081'

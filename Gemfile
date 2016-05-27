@@ -30,6 +30,5 @@ group :kitchen do
   gem 'kitchen-docker'
   gem 'kitchen-vagrant'
 
-  # gem 'kitchen-sync' temporary fix
-  gem 'kitchen-sync', :github => 'coderanger/kitchen-sync', :branch => 'master'
+  gem 'kitchen-sync'
 end

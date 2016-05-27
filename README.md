@@ -23,9 +23,9 @@ You can visit fixture cookbook [test-nexus](test/fixtures/cookbooks/test-nexus)
 
 ## Platform:
 
-* Debian
-* Ubuntu
-* Centos
+* debian
+* ubuntu
+* centos
 
 ## Cookbooks:
 
@@ -39,6 +39,7 @@ You can visit fixture cookbook [test-nexus](test/fixtures/cookbooks/test-nexus)
 * `node['nexus']['user']` -  Defaults to `nexus`.
 * `node['nexus']['group']` -  Defaults to `nexus`.
 * `node['nexus']['dir']` -  Defaults to `/opt`.
+* `node['nexus']['lock']` -  Defaults to `/var/lib/nexus/nexus.lock`.
 * `node['nexus']['conf']['application-port']` -  Defaults to `8081`.
 * `node['nexus']['conf']['application-host']` -  Defaults to `0.0.0.0`.
 * `node['nexus']['conf']['nexus-webapp']` -  Defaults to `${bundleBasedir}/nexus`.
@@ -55,5 +56,7 @@ You can visit fixture cookbook [test-nexus](test/fixtures/cookbooks/test-nexus)
 # License and Maintainer
 
 Maintainer:: Yauhen Artsiukhou (<jsirex@gmail.com>)
+Source:: https://github.com/jsirex/simple-nexus-cookbook
+Issues:: https://github.com/jsirex/simple-nexus-cookbook/issues
 
 License:: Apache

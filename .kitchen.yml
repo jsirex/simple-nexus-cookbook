@@ -27,4 +27,9 @@ suites:
     run_list:
       - recipe[simple-nexus-test]
     attributes:
+      nexus:
+        download_url: http://nexus.e3s.epam.com/content/repositories/e3s-install/nexus/2.13.0/nexus-2.13.0-01-bundle.tar.gz
+        checksum: 4c4e88a2410e1740e688ea1ab3c6066a6a90f76c479e10e4718c517a27f3a614
+        version: 2.13.0-01
+
 

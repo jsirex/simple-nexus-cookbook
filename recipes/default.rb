@@ -23,10 +23,33 @@ nexus = ark 'nexus' do
 
   prefix_root node['nexus']['dir']
   prefix_home node['nexus']['dir']
+
+  notifies :stop, 'service[nexus-old]', :immediately
+  notifies :delete, 'file[nexus-lock]', :immediately
+  notifies :start, 'service[nexus]', :delayed
+end
+
+# Remember old link and define service
+# If installation changes we'll stop old service and start new one
+link_path = ::File.join(nexus.prefix_home, nexus.name)
+link_source = ::File.exist?(link_path) ? ::File.readlink(link_path) : link_path
+old_init_script = ::File.join(link_source, 'bin', 'nexus')
+
+service 'nexus-old' do
+  status_command "#{old_init_script} status"
+  stop_command "#{old_init_script} stop"
+
+  action :nothing
+end
+
+file 'nexus-lock' do
+  path node['nexus']['lock']
+
+  action :nothing
 end
 
 link '/etc/init.d/nexus' do
-  to ::File.join(nexus.prefix_home, nexus.name, 'bin', 'nexus')
+  to ::File.join(link_path, 'bin', 'nexus')
 end
 
 ruby_block 'Configure-Nexus-Init-File' do
@@ -51,7 +74,7 @@ directory node['nexus']['conf']['nexus-work'] do
   notifies :restart, 'service[nexus]', :delayed
 end
 
-template ::File.join(nexus.prefix_home, nexus.name, 'conf', 'nexus.properties') do
+template ::File.join(link_path, 'conf', 'nexus.properties') do
   source 'nexus.properties.erb'
 
   owner node['nexus']['user']
@@ -62,7 +85,7 @@ template ::File.join(nexus.prefix_home, nexus.name, 'conf', 'nexus.properties') 
   notifies :restart, 'service[nexus]', :delayed
 end
 
-wrapper = ::File.join(nexus.prefix_home, nexus.name, 'bin', 'jsw', 'conf', 'wrapper.conf')
+wrapper = ::File.join(link_path, 'bin', 'jsw', 'conf', 'wrapper.conf')
 
 ruby_block 'Configure-Wrapper-Memory' do
   block do
